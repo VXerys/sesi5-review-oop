@@ -1,43 +1,30 @@
-public class Tabungan extends Rekening{
-     double bungaTabungan;
+public class Tabungan extends Rekening {
+     double bungaTahunan; // dalam persen
      
-
-     public Tabungan(String namaPemilik, String nomorRekening, double saldo, double bungaTabungan) {
-          super(namaPemilik, nomorRekening, saldo);
-          this.bungaTabungan = bungaTabungan; 
-
-     }    
-
-     public double getBungaTabungan() {
-          return bungaTabungan;
-      }
-  
-      public void setBungaTabungan(double bungaTabungan) {
-          this.bungaTabungan = bungaTabungan;
-      }
-
-      @Override
-      public double addSetor(double setor){
-           return super.addSetor(setor);
-       }
-   
-      @Override
-       public double addTarik(double tarik){
-           return super.addTarik(tarik);
-       }
-
-     public double hitungTabungan(int bulan){
-          return getSaldo() * (1 + bungaTabungan/12) * bulan;
+     public Tabungan(String namaPemilik, String nomorRekening, double saldo, double bungaTahunan) {
+         super(namaPemilik, nomorRekening, saldo);
+         this.bungaTahunan = bungaTahunan;
      }
-
+     
+     public double getBungaTahunan() {
+         return bungaTahunan;
+     }
+     
+     public void setBungaTahunan(double bungaTahunan) {
+         this.bungaTahunan = bungaTahunan;
+     }
+     
+     public double hitungBunga(int bulan) {
+         double bungaBulanan = (bungaTahunan / 100.0) / 12;
+         return saldo * bungaBulanan * bulan;
+     }
+     
      @Override
      public void tampilkanInfo() {
-          super.tampilkanInfo();
-          System.out.println("Bunga Tabungan : " + bungaTabungan);
-          System.out.println("Jenis Rekening : Tabungan");
-          System.out.println("Tabungan : " + hitungTabungan(1));
+         super.tampilkanInfo();
+         System.out.println("Jenis Rekening: Tabungan");
+         System.out.println("Bunga Tahunan: " + bungaTahunan + "%");
+         System.out.println("Bunga per 1 bulan: " + hitungBunga(1));
      }
-
-
-}
-
+ }
+ 
